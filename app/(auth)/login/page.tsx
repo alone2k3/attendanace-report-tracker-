@@ -20,7 +20,21 @@ export default async function LoginPage({ searchParams }: { searchParams: Promis
           <FormNotice message="Email confirmed. You can sign in once a mentor approves your department." />
         </div>
       ) : null}
+      {sp.reset ? (
+        <div className="mb-4">
+          <FormNotice message="Password changed. Sign in with your new password." />
+        </div>
+      ) : null}
       <LoginForm next={sp.next} initialError={sp.state ? STATE[sp.state] : undefined} />
+      <p className="mt-4 text-sm">
+        <Link href="/forgot-password" className="font-semibold text-gold-deep underline">
+          Forgot password?
+        </Link>
+        <span className="mx-2 text-muted">·</span>
+        <Link href="/forgot-password?mode=resend" className="font-semibold text-gold-deep underline">
+          Resend confirmation email
+        </Link>
+      </p>
       <p className="mt-6 text-sm text-muted">
         New here?{" "}
         <Link href="/register" className="font-semibold text-gold-deep underline">
