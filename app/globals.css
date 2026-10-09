@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #000000;
+  --color-ink-soft: #14110A;
+  --color-text: #3B3426;
+  --color-muted: #6B6250;
+  --color-ivory: #FAF6EC;
+  --color-card: #FFFFFF;
+  --color-line: #E9E1CC;
+  --color-line-soft: #F0E9D6;
+  --color-field: #FFFDF7;
+  --color-field-line: #DCD2B8;
+  --color-gold: #C9A23F;
+  --color-gold-light: #F0CF6E;
+  --color-gold-deep: #7A5C0E;
+  --color-gold-tint: #F6EDCF;
+  --color-gold-ink: #6E5410;
+  --color-nav-active: #2A2311;
+  --color-nav-text: #E9E1CC;
+  --color-nav-label: #8E8366;
+  --color-segmented: #F1EADA;
+  --color-track: #EFE7D2;
+  --color-selected: #FFF4D6;
+  --color-creative: #C9A23F;
+  --color-creative-tint: #F6EDCF;
+  --color-creative-ink: #6E5410;
+  --color-production: #D9692B;
+  --color-production-tint: #FBE6D8;
+  --color-production-ink: #9A3F0E;
+  --color-finance: #5E7F35;
+  --color-finance-tint: #E6EFD9;
+  --color-finance-ink: #3E5A1E;
+  --color-ok-bg: #E3EFE5;
+  --color-ok: #1F5F37;
+  --color-warn-bg: #FBEBD0;
+  --color-warn: #7A4A00;
+  --color-info-bg: #E1ECF7;
+  --color-info: #1F4F82;
+  --color-neutral-bg: #EFEBE1;
+  --color-neutral: #5F5848;
+  --color-bad-bg: #F8E1DE;
+  --color-bad: #8C2A20;
+  --radius-card: 18px;
+  --radius-control: 12px;
+  --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
+}
+
+/* shadcn variable mapping */
+:root {
+  --background: #FAF6EC;
+  --foreground: #3B3426;
+  --primary: #C9A23F;
+  --primary-foreground: #000000;
+  --secondary: #FFFFFF;
+  --secondary-foreground: #14110A;
+  --muted-foreground: #6B6250;
+  --border: #E9E1CC;
+  --input: #DCD2B8;
+  --ring: #C9A23F;
+  --radius: 12px;
+  color-scheme: light;
+}
+
+html, body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 15px;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-display);
+}
+
+:focus-visible {
+  outline: 2px solid #7A5C0E;
+  outline-offset: 2px;
+}
+
+.label-caps {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+}

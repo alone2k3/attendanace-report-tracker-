@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sign in, register and daily tasks — Turmeric Work Tracker</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&amp;family=Figtree:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FAF6EC;font-family:Figtree,system-ui,sans-serif;color:#3B3426}
+a{color:#7A5C0E}a:hover{color:#4F3B07}
+</style>
+</helmet>
+<div style="min-height: 100vh; background: #FAF6EC; font-family: Figtree, system-ui, sans-serif; color: #3B3426;">
+
+<sc-if value="{{signedOut}}" hint-placeholder-val="{{true}}">
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap;">
+
+<div style="flex: 1 1 420px; background: #000000; color: #F3E9CF; padding: 56px 48px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; gap: 48px;">
+<img src="/_blob/24da18a25fe69bd294f06abe9431b8aa" alt="turmeric" style="width: 240px; height: auto; display: block;">
+<div style="display: flex; flex-direction: column; gap: 16px; max-width: 460px;">
+<h1 style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 44px; line-height: 1.1; font-weight: 600; color: #FFFFFF; letter-spacing: -0.01em;">Every day's work, in one place.</h1>
+<p style="margin: 0; font-size: 17px; line-height: 1.55; color: #CFC4A6;">Check in, log your tasks and keep your mentor in the loop. You're tagged to one department when you register, and you only post to that department.</p>
+</div>
+<span style="font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #8E8366;">Work tracker</span>
+</div>
+
+<div style="flex: 1 1 480px; display: flex; align-items: center; justify-content: center; padding: 56px 32px; box-sizing: border-box;">
+
+<sc-if value="{{showSignin}}" hint-placeholder-val="{{true}}">
+<form onSubmit="{{onLoginSubmit}}" aria-labelledby="signin-heading" style="width: 100%; max-width: 420px; display: flex; flex-direction: column; gap: 18px;">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h2 id="signin-heading" style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 30px; font-weight: 600; color: #14110A;">Sign in</h2>
+<p style="margin: 0; font-size: 15px; color: #6B6250;">Use your work email. Your department comes from your account.</p>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Work email<input type="email" autocomplete="username" value="{{email}}" onChange="{{onEmail}}" placeholder="name@yourcompany.com" style="box-sizing: border-box; min-height: 48px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFFFF;"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Password<input type="password" autocomplete="current-password" value="{{password}}" onChange="{{onPassword}}" style="box-sizing: border-box; min-height: 48px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFFFF;"></label>
+<sc-if value="{{showLoginError}}" hint-placeholder-val="{{false}}"><span role="alert" style="font-size: 14px; font-weight: 600; color: #8C2A20;">{{loginErrorText}}</span></sc-if>
+<button type="submit" style="min-height: 50px; padding: 12px 20px; border-radius: 12px; border: none; background: #C9A23F; color: #000000; font-family: Figtree, sans-serif; font-size: 16px; font-weight: 700; cursor: pointer;">Sign in</button>
+<button type="button" onClick="{{goRegister}}" style="min-height: 44px; background: transparent; border: none; color: #7A5C0E; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: underline;">New here? Register</button>
+<div style="display: flex; align-items: center; gap: 12px; margin-top: 4px;"><span style="flex: 1 1 auto; height: 1px; background: #E4DAC0;"></span><span style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6250;">Demo accounts</span><span style="flex: 1 1 auto; height: 1px; background: #E4DAC0;"></span></div>
+<sc-for list="{{demo}}" as="a" hint-placeholder-count="4">
+<button type="button" onClick="{{a.go}}" style="display: flex; align-items: center; gap: 14px; text-align: left; padding: 10px 14px; min-height: 60px; border-radius: 14px; border: 1px solid #E4DAC0; background: #FFFFFF; cursor: pointer; font-family: Figtree, sans-serif; color: #3B3426;">
+<sc-if value="{{a.isC}}" hint-placeholder-val="{{true}}"><span style="width: 38px; height: 38px; border-radius: 50%; background: #C9A23F; color: #000000; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;">{{a.ini}}</span></sc-if>
+<sc-if value="{{a.isP}}" hint-placeholder-val="{{false}}"><span style="width: 38px; height: 38px; border-radius: 50%; background: #E07A3A; color: #000000; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;">{{a.ini}}</span></sc-if>
+<sc-if value="{{a.isF}}" hint-placeholder-val="{{false}}"><span style="width: 38px; height: 38px; border-radius: 50%; background: #5E7F35; color: #FFFFFF; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;">{{a.ini}}</span></sc-if>
+<sc-if value="{{a.isM}}" hint-placeholder-val="{{false}}"><span style="width: 38px; height: 38px; border-radius: 50%; background: #14110A; color: #F0CF6E; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;">{{a.ini}}</span></sc-if>
+<span style="flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px;"><strong style="font-size: 15px; color: #14110A;">{{a.person}}</strong><span style="font-size: 13px; color: #6B6250;">{{a.label}}</span></span>
+<span style="font-size: 13px; font-weight: 600; color: #7A5C0E;">Sign in →</span>
+</button>
+</sc-for>
+<p style="margin: 0; font-size: 13px; color: #6B6250;">Demo only: these accounts sign in with any password.</p>
+</form>
+</sc-if>
+
+<sc-if value="{{showRegister}}" hint-placeholder-val="{{false}}">
+<form onSubmit="{{submitReg}}" aria-labelledby="reg-heading" style="width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 18px;">
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<h2 id="reg-heading" style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 30px; font-weight: 600; color: #14110A;">Register</h2>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #6B6250;">Choose your department. It's tagged to your account here, a mentor confirms it, and after that only a mentor can change it.</p>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Full name<input type="text" autocomplete="name" value="{{reg.name}}" onChange="{{onRegName}}" style="box-sizing: border-box; min-height: 48px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFFFF;"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Work email<input type="email" autocomplete="email" value="{{reg.email}}" onChange="{{onRegEmail}}" placeholder="name@yourcompany.com" style="box-sizing: border-box; min-height: 48px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFFFF;"></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Password<input type="password" autocomplete="new-password" value="{{reg.password}}" onChange="{{onRegPassword}}" style="box-sizing: border-box; min-height: 48px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFFFF;"><span style="font-size: 13px; font-weight: 400; color: #6B6250;">At least 6 characters.</span></label>
+<fieldset style="border: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px;">
+<legend style="padding: 0 0 8px; font-size: 14px; font-weight: 600; color: #14110A;">Your department</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{regDepts}}" as="d" hint-placeholder-count="3">
+<sc-if value="{{d.on}}" hint-placeholder-val="{{false}}"><button type="button" aria-pressed="true" onClick="{{d.pick}}" style="flex: 1 1 120px; display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 10px 14px; border-radius: 12px; border: 2px solid #14110A; background: #FFFFFF; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 700; color: #14110A; cursor: pointer;"><sc-if value="{{d.isC}}" hint-placeholder-val="{{true}}"><span style="width: 12px; height: 12px; border-radius: 50%; background: #C9A23F;"></span></sc-if><sc-if value="{{d.isP}}" hint-placeholder-val="{{false}}"><span style="width: 12px; height: 12px; border-radius: 50%; background: #D9692B;"></span></sc-if><sc-if value="{{d.isF}}" hint-placeholder-val="{{false}}"><span style="width: 12px; height: 12px; border-radius: 50%; background: #5E7F35;"></span></sc-if>{{d.name}}</button></sc-if>
+<sc-if value="{{d.off}}" hint-placeholder-val="{{true}}"><button type="button" aria-pressed="false" onClick="{{d.pick}}" style="flex: 1 1 120px; display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 10px 14px; border-radius: 12px; border: 1px solid #DCD2B8; background: #FFFFFF; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 500; color: #3B3426; cursor: pointer;"><sc-if value="{{d.isC}}" hint-placeholder-val="{{true}}"><span style="width: 12px; height: 12px; border-radius: 50%; background: #C9A23F;"></span></sc-if><sc-if value="{{d.isP}}" hint-placeholder-val="{{false}}"><span style="width: 12px; height: 12px; border-radius: 50%; background: #D9692B;"></span></sc-if><sc-if value="{{d.isF}}" hint-placeholder-val="{{false}}"><span style="width: 12px; height: 12px; border-radius: 50%; background: #5E7F35;"></span></sc-if>{{d.name}}</button></sc-if>
+</sc-for>
+</div>
+</fieldset>
+<sc-if value="{{showRegError}}" hint-placeholder-val="{{false}}"><span role="alert" style="font-size: 14px; font-weight: 600; color: #8C2A20;">{{regErrorText}}</span></sc-if>
+<button type="submit" style="min-height: 50px; padding: 12px 20px; border-radius: 12px; border: none; background: #C9A23F; color: #000000; font-family: Figtree, sans-serif; font-size: 16px; font-weight: 700; cursor: pointer;">Register</button>
+<button type="button" onClick="{{goSignin}}" style="min-height: 44px; background: transparent; border: none; color: #7A5C0E; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: underline;">I already have an account</button>
+</form>
+</sc-if>
+
+<sc-if value="{{showRegistered}}" hint-placeholder-val="{{false}}">
+<div role="status" style="width: 100%; max-width: 440px; display: flex; flex-direction: column; gap: 18px;">
+<span style="width: 56px; height: 56px; border-radius: 50%; background: #C9A23F; color: #000000; display: flex; align-items: center; justify-content: center;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
+<h2 style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 30px; font-weight: 600; color: #14110A;">You're registered, {{registered.first}}</h2>
+<div style="display: flex; flex-direction: column; gap: 10px; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 14px; padding: 16px 18px; font-size: 15px; line-height: 1.5;">
+<span>Department tag: <strong style="color: #14110A;">{{registered.dept}}</strong></span>
+<span>{{registered.mentor}} will confirm it before you can sign in. After that, only a mentor can change your department.</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #6B6250;">Demo: sign in as Arjun Mehta to approve it.</p>
+<button type="button" onClick="{{goSignin}}" style="align-self: flex-start; min-height: 48px; padding: 12px 22px; border-radius: 12px; border: none; background: #14110A; color: #F3E9CF; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer;">Back to sign in</button>
+</div>
+</sc-if>
+
+</div>
+</div>
+</sc-if>
+
+<sc-if value="{{memberIn}}" hint-placeholder-val="{{false}}">
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap;">
+
+<nav aria-label="Main menu" style="flex: 1 1 240px; background: #000000; color: #F3E9CF; padding: 28px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 8px;">
+<img src="/_blob/24da18a25fe69bd294f06abe9431b8aa" alt="turmeric" style="width: 150px; height: auto; display: block;">
+<span style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #A99E80; padding-left: 4px;">Work tracker</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8E8366; padding: 0 12px 6px;">Me</span>
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg><span>Home</span></a>
+<span aria-current="page" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; background: #2A2311; color: #F0CF6E; font-size: 15px; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg><span>Daily tasks</span></span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8E8366; padding: 0 12px 6px;">My department</span>
+<sc-if value="{{isC}}" hint-placeholder-val="{{true}}"><a href="Creative.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 5.3L19.5 10l-5.3 2.2L12 17.5l-2.2-5.3L4.5 10l5.3-1.7z"></path></svg><span>Creative</span><span style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #D9B24A;"></span></a></sc-if>
+<sc-if value="{{isP}}" hint-placeholder-val="{{false}}"><a href="Production.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="13" height="11" rx="2"></rect><path d="M16 11l5-3v9l-5-3"></path></svg><span>Production</span><span style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #E07A3A;"></span></a></sc-if>
+<sc-if value="{{isF}}" hint-placeholder-val="{{false}}"><a href="Finance.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12M6 8.5h12M9 4h1a4.5 4.5 0 0 1 0 9H7l7 7"></path></svg><span>Finance</span><span style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #8DB05A;"></span></a></sc-if>
+<span style="font-size: 12px; line-height: 1.5; color: #8E8366; padding: 6px 12px 0;">Other departments' logs are private to their teams and mentors.</span>
+</div>
+<div style="margin-top: auto; border-top: 1px solid #2A2618; padding: 20px 8px 0; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: center; gap: 12px;">
+<sc-if value="{{isC}}" hint-placeholder-val="{{true}}"><span style="width: 38px; height: 38px; border-radius: 50%; background: #C9A23F; color: #000000; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0;">{{me.ini}}</span></sc-if>
+<sc-if value="{{isP}}" hint-placeholder-val="{{false}}"><span style="width: 38px; height: 38px; border-radius: 50%; background: #E07A3A; color: #000000; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0;">{{me.ini}}</span></sc-if>
+<sc-if value="{{isF}}" hint-placeholder-val="{{false}}"><span style="width: 38px; height: 38px; border-radius: 50%; background: #8DB05A; color: #000000; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0;">{{me.ini}}</span></sc-if>
+<span style="display: flex; flex-direction: column; gap: 2px;"><span style="color: #F3E9CF; font-size: 14px; font-weight: 600;">{{me.person}}</span><span style="color: #A99E80; font-size: 12px;">{{dep.name}} · Member</span></span>
+</div>
+<button type="button" onClick="{{signOut}}" style="align-self: flex-start; min-height: 44px; padding: 8px 14px; border-radius: 10px; border: 1px solid #3A3220; background: transparent; color: #E9E1CC; font-family: Figtree, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer;">Sign out</button>
+</div>
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; padding: 32px 40px 56px; box-sizing: border-box;">
+<div style="max-width: 1160px; display: flex; flex-direction: column; gap: 24px;">
+
+<header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<p style="margin: 0; font-size: 14px; color: #6B6250;"><a href="Main.dc.html">Home</a> / Daily tasks</p>
+<h1 style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 34px; font-weight: 600; color: #14110A; letter-spacing: -0.01em;">Post today's tasks</h1>
+<p style="margin: 0; font-size: 15px; color: #6B6250;">Friday, 9 October · good to see you, {{me.first}}</p>
+</div>
+<span style="font-size: 12px; color: #6B6250; border: 1px dashed #C9B98A; border-radius: 999px; padding: 4px 10px;">Sample data</span>
+</header>
+
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; background: #FFFFFF; border: 2px solid #14110A; border-radius: 16px; padding: 16px 18px;">
+<sc-if value="{{isC}}" hint-placeholder-val="{{true}}"><span style="width: 48px; height: 48px; border-radius: 12px; background: #C9A23F; color: #000000; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 5.3L19.5 10l-5.3 2.2L12 17.5l-2.2-5.3L4.5 10l5.3-1.7z"></path></svg></span></sc-if>
+<sc-if value="{{isP}}" hint-placeholder-val="{{false}}"><span style="width: 48px; height: 48px; border-radius: 12px; background: #D9692B; color: #000000; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="13" height="11" rx="2"></rect><path d="M16 11l5-3v9l-5-3"></path></svg></span></sc-if>
+<sc-if value="{{isF}}" hint-placeholder-val="{{false}}"><span style="width: 48px; height: 48px; border-radius: 12px; background: #5E7F35; color: #FFFFFF; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12M6 8.5h12M9 4h1a4.5 4.5 0 0 1 0 9H7l7 7"></path></svg></span></sc-if>
+<span style="display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: #6B6250;">Your department</span><strong style="font-family: Outfit, Figtree, sans-serif; font-size: 22px; font-weight: 600; color: #14110A;">{{dep.name}}</strong></span>
+<span style="margin-left: auto; display: flex; align-items: center; gap: 10px; font-size: 14px; color: #3B3426; max-width: 460px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink: 0;"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg><span>Tagged when you registered. You can only post to {{dep.name}}, and only a mentor can change your department.</span></span>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+
+<section aria-labelledby="add-heading" style="flex: 2 1 380px; min-width: 0; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 18px;">
+<div style="display: flex; flex-direction: column; gap: 2px;">
+<h2 id="add-heading" style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 21px; font-weight: 600; color: #14110A;">Add a task</h2>
+<span style="font-size: 13px; color: #6B6250;">Goes to the {{dep.name}} log · reviewed by {{dep.mentor}}</span>
+</div>
+
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">What did you do?<input type="text" value="{{form.task}}" onChange="{{onTask}}" placeholder="{{dep.taskHint}}" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"></label>
+<sc-if value="{{showError}}" hint-placeholder-val="{{false}}"><span role="alert" style="margin-top: -10px; font-size: 13px; font-weight: 600; color: #8C2A20;">Write what you did before adding the task.</span></sc-if>
+
+<sc-if value="{{isC}}" hint-placeholder-val="{{true}}">
+<div style="display: flex; flex-wrap: wrap; gap: 12px;">
+<label style="flex: 2 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Project<select value="{{form.project}}" onChange="{{onProject}}" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 12px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"><option>Diwali festive campaign</option><option>Monsoon menu shoot</option><option>Social calendar — November</option><option>Website refresh</option><option>No project</option></select></label>
+<label style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Type of work<select value="{{form.type}}" onChange="{{onType}}" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 12px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"><option>Design</option><option>Copy</option><option>Video edit</option><option>Revision</option><option>Meeting</option></select></label>
+</div>
+</sc-if>
+
+<sc-if value="{{isP}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-wrap: wrap; gap: 12px;">
+<label style="flex: 2 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Shoot or project<select value="{{form.project}}" onChange="{{onProject}}" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 12px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"><option>Monsoon menu shoot</option><option>Diwali festive campaign</option><option>Launch teaser film</option><option>Website refresh</option><option>No project</option></select></label>
+<label style="flex: 1 1 140px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Type of work<select value="{{form.type}}" onChange="{{onType}}" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 12px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"><option>Shoot</option><option>Recce</option><option>Edit</option><option>Call sheet</option><option>Equipment</option></select></label>
+<label style="flex: 1 1 100%; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Location<input type="text" value="{{form.location}}" onChange="{{onLocation}}" placeholder="Studio, office or shoot location" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"></label>
+</div>
+</sc-if>
+
+<sc-if value="{{isF}}" hint-placeholder-val="{{false}}">
+<div style="display: flex; flex-wrap: wrap; gap: 12px;">
+<label style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Category<select value="{{form.type}}" onChange="{{onType}}" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 12px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"><option>Invoices</option><option>Payments</option><option>Reconciliation</option><option>Vendor follow-up</option><option>Project budget</option></select></label>
+<label style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Reference<input type="text" value="{{form.location}}" onChange="{{onLocation}}" placeholder="Invoice or batch no." style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"></label>
+<label style="flex: 1 1 100%; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Linked project (optional)<select value="{{form.project}}" onChange="{{onProject}}" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 12px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"><option>No project</option><option>Diwali festive campaign</option><option>Packaging redesign</option><option>Annual report design</option></select></label>
+</div>
+</sc-if>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end;">
+<label style="flex: 1 1 150px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Status<select value="{{form.status}}" onChange="{{onStatus}}" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 12px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"><option>Done</option><option>In progress</option></select></label>
+</div>
+
+<button type="button" onClick="{{addTask}}" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 12px 20px; border-radius: 12px; border: none; background: #C9A23F; color: #000000; font-family: Figtree, sans-serif; font-size: 16px; font-weight: 700; cursor: pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Add to {{dep.name}} log</button>
+</section>
+
+<section aria-labelledby="log-heading" style="flex: 3 1 480px; min-width: 0; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 16px;">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px;">
+<div style="display: flex; flex-direction: column; gap: 2px;">
+<h2 id="log-heading" style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 21px; font-weight: 600; color: #14110A;">My {{dep.name}} log · today</h2>
+<span style="font-size: 13px; color: #6B6250;">Tracked only under {{dep.name}}</span>
+</div>
+<sc-if value="{{notSubmitted}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{submitDay}}" style="min-height: 44px; padding: 10px 18px; border-radius: 12px; border: none; background: #14110A; color: #F3E9CF; font-family: Figtree, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer;">Send day to {{dep.mentor}}</button></sc-if>
+<sc-if value="{{submitted}}" hint-placeholder-val="{{false}}"><span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600; color: #1F5F37; background: #E3EFE5; border-radius: 999px; padding: 8px 14px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg>Sent for review</span></sc-if>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 12px;">
+<div style="flex: 1 1 120px; background: #000000; color: #F3E9CF; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12px; color: #CFC4A6;">Tasks</span><span style="font-family: Outfit, Figtree, sans-serif; font-size: 28px; font-weight: 600; color: #F0CF6E;">{{totals.count}}</span></div>
+<div style="flex: 1 1 120px; background: #FBF8EF; border: 1px solid #EFE7D2; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12px; color: #6B6250;">Done</span><span style="font-family: Outfit, Figtree, sans-serif; font-size: 28px; font-weight: 600; color: #14110A;">{{totals.done}}</span></div>
+<div style="flex: 1 1 120px; background: #FBF8EF; border: 1px solid #EFE7D2; border-radius: 14px; padding: 14px 16px; display: flex; flex-direction: column; gap: 2px;"><span style="font-size: 12px; color: #6B6250;">In progress</span><span style="font-family: Outfit, Figtree, sans-serif; font-size: 28px; font-weight: 600; color: #14110A;">{{totals.open}}</span></div>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center;">
+<span style="font-size: 13px; color: #6B6250;">Tasks by {{dep.typeWord}}:</span>
+<sc-for list="{{groups}}" as="g" hint-placeholder-count="2">
+<span style="font-size: 13px; font-weight: 600; color: #3B3426; background: #F5EFDF; border-radius: 999px; padding: 4px 10px;">{{g.label}} · {{g.count}}</span>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-direction: column;">
+<sc-if value="{{empty}}" hint-placeholder-val="{{false}}"><p style="margin: 0; padding: 24px 0; text-align: center; font-size: 14px; color: #6B6250; border-top: 1px solid #F0E9D6;">No tasks logged yet today. Add your first one on the left.</p></sc-if>
+<sc-for list="{{rows}}" as="r" hint-placeholder-count="3">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px; padding: 14px 0; border-top: 1px solid #F0E9D6;">
+<span style="width: 58px; font-size: 13px; color: #6B6250; flex-shrink: 0;">{{r.time}}</span>
+<span style="flex: 1 1 220px; min-width: 0; display: flex; flex-direction: column; gap: 2px;"><strong style="font-size: 15px; color: #14110A;">{{r.task}}</strong><span style="font-size: 13px; color: #6B6250;">{{r.meta}}</span></span>
+<sc-if value="{{r.isDone}}" hint-placeholder-val="{{true}}"><button type="button" onClick="{{r.toggle}}" aria-label="Mark {{r.task}} as in progress" style="min-height: 36px; min-width: 104px; padding: 6px 12px; border-radius: 999px; border: none; background: #E3EFE5; color: #1F5F37; font-family: Figtree, sans-serif; font-size: 12px; font-weight: 700; cursor: pointer;">Done</button></sc-if>
+<sc-if value="{{r.isOpen}}" hint-placeholder-val="{{false}}"><button type="button" onClick="{{r.toggle}}" aria-label="Mark {{r.task}} as done" style="min-height: 36px; min-width: 104px; padding: 6px 12px; border-radius: 999px; border: none; background: #F6EDCF; color: #6E5410; font-family: Figtree, sans-serif; font-size: 12px; font-weight: 700; cursor: pointer;">In progress</button></sc-if>
+<button type="button" onClick="{{r.remove}}" aria-label="Remove {{r.task}}" style="width: 40px; height: 40px; border-radius: 10px; border: 1px solid #E9E1CC; background: #FFFFFF; color: #6B6250; cursor: pointer; display: flex; align-items: center; justify-content: center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"></path></svg></button>
+</div>
+</sc-for>
+</div>
+
+<div style="display: flex; flex-direction: column; gap: 8px; border-top: 1px solid #F0E9D6; padding-top: 16px;">
+<span style="font-size: 13px; font-weight: 600; color: #14110A;">This week · tasks you logged</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<sc-for list="{{week}}" as="d" hint-placeholder-count="5">
+<sc-if value="{{d.today}}" hint-placeholder-val="{{false}}"><span style="min-width: 64px; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 10px; border-radius: 12px; border: 2px dashed #C9A23F; font-size: 12px; color: #7A5C0E;"><span>{{d.label}}</span><strong style="font-size: 18px; color: #14110A;">{{d.count}}</strong></span></sc-if>
+<sc-if value="{{d.past}}" hint-placeholder-val="{{true}}"><span style="min-width: 64px; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 10px; border-radius: 12px; background: #F5EFDF; font-size: 12px; color: #6B6250;"><span>{{d.label}}</span><strong style="font-size: 18px; color: #14110A;">{{d.count}}</strong></span></sc-if>
+</sc-for>
+</div>
+</div>
+</section>
+
+</div>
+</div>
+</main>
+</div>
+</sc-if>
+
+<sc-if value="{{mentorIn}}" hint-placeholder-val="{{false}}">
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap;">
+
+<nav aria-label="Main menu" style="flex: 1 1 240px; background: #000000; color: #F3E9CF; padding: 28px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 8px;">
+<img src="/_blob/24da18a25fe69bd294f06abe9431b8aa" alt="turmeric" style="width: 150px; height: auto; display: block;">
+<span style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #A99E80; padding-left: 4px;">Work tracker</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8E8366; padding: 0 12px 6px;">Mentor</span>
+<a href="Mentor.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>Mentor view</span></a>
+<span aria-current="page" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; background: #2A2311; color: #F0CF6E; font-size: 15px; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="8" r="3.5"></circle><path d="M2.5 20a6.5 6.5 0 0 1 13 0"></path><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"></path></svg><span>People &amp; departments</span>{{pendingBadge}}</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8E8366; padding: 0 12px 6px;">My departments</span>
+<a href="Creative.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 5.3L19.5 10l-5.3 2.2L12 17.5l-2.2-5.3L4.5 10l5.3-1.7z"></path></svg><span>Creative</span><span style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #D9B24A;"></span></a>
+<a href="Production.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="13" height="11" rx="2"></rect><path d="M16 11l5-3v9l-5-3"></path></svg><span>Production</span><span style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #E07A3A;"></span></a>
+</div>
+<div style="margin-top: auto; border-top: 1px solid #2A2618; padding: 20px 8px 0; display: flex; flex-direction: column; gap: 12px;">
+<div style="display: flex; align-items: center; gap: 12px;">
+<span style="width: 38px; height: 38px; border-radius: 50%; background: #F3E9CF; color: #000000; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0;">{{me.ini}}</span>
+<span style="display: flex; flex-direction: column; gap: 2px;"><span style="color: #F3E9CF; font-size: 14px; font-weight: 600;">{{me.person}}</span><span style="color: #A99E80; font-size: 12px;">Mentor · {{mentorDepts}}</span></span>
+</div>
+<button type="button" onClick="{{signOut}}" style="align-self: flex-start; min-height: 44px; padding: 8px 14px; border-radius: 10px; border: 1px solid #3A3220; background: transparent; color: #E9E1CC; font-family: Figtree, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer;">Sign out</button>
+</div>
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; padding: 32px 40px 56px; box-sizing: border-box;">
+<div style="max-width: 1160px; display: flex; flex-direction: column; gap: 24px;">
+
+<header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<p style="margin: 0; font-size: 14px; color: #6B6250;"><a href="Mentor.dc.html">Mentor</a> / People &amp; departments</p>
+<h1 style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 34px; font-weight: 600; color: #14110A; letter-spacing: -0.01em;">People &amp; departments</h1>
+<p style="margin: 0; font-size: 15px; line-height: 1.5; color: #6B6250; max-width: 720px;">You mentor {{mentorDeptsAnd}}. People are tagged to a department when they register. Only mentors can confirm or change it, and every change is logged.</p>
+</div>
+<span style="font-size: 12px; color: #6B6250; border: 1px dashed #C9B98A; border-radius: 999px; padding: 4px 10px;">Sample data</span>
+</header>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+<div style="flex: 3 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 24px;">
+
+<section aria-labelledby="pending-heading" style="background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 22px 24px; display: flex; flex-direction: column; gap: 4px;">
+<div style="display: flex; align-items: center; gap: 10px; padding-bottom: 10px;"><h2 id="pending-heading" style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 20px; font-weight: 600; color: #14110A;">New registrations</h2><span style="font-size: 12px; font-weight: 700; color: #000000; background: #C9A23F; border-radius: 999px; padding: 3px 10px;">{{pendingCount}}</span></div>
+<sc-if value="{{noPending}}" hint-placeholder-val="{{false}}"><p style="margin: 0; padding: 16px 0; font-size: 14px; color: #6B6250; border-top: 1px solid #F0E9D6;">No one is waiting. New sign-ups for your departments show up here.</p></sc-if>
+<sc-for list="{{pending}}" as="a" hint-placeholder-count="1">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 16px 0; border-top: 1px solid #F0E9D6;">
+<span style="width: 40px; height: 40px; border-radius: 50%; background: #F5EFDF; color: #3B3426; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;">{{a.ini}}</span>
+<span style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 4px;"><strong style="font-size: 15px; color: #14110A;">{{a.person}}</strong><span style="font-size: 13px; color: #6B6250;">{{a.email}} · asked for {{a.requested}}</span></span>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 600; color: #6B6250;">Department<select value="{{a.choice}}" onChange="{{a.onChoice}}" style="box-sizing: border-box; min-height: 44px; min-width: 150px; border: 1px solid #DCD2B8; border-radius: 10px; padding: 8px 10px; font-family: Figtree, sans-serif; font-size: 14px; color: #14110A; background: #FFFDF7;"><option value="c">Creative</option><option value="p">Production</option><option value="f">Finance</option></select></label>
+<span style="display: flex; gap: 8px; align-self: flex-end;">
+<button type="button" onClick="{{a.approve}}" style="min-height: 44px; padding: 10px 16px; border-radius: 12px; border: none; background: #C9A23F; color: #000000; font-family: Figtree, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer;">Approve</button>
+<button type="button" onClick="{{a.decline}}" style="min-height: 44px; padding: 10px 16px; border-radius: 12px; border: 1px solid #DCD2B8; background: #FFFFFF; color: #14110A; font-family: Figtree, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer;">Decline</button>
+</span>
+</div>
+</sc-for>
+</section>
+
+<section aria-labelledby="team-heading" style="background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 22px 24px; display: flex; flex-direction: column; gap: 4px;">
+<div style="display: flex; flex-direction: column; gap: 2px; padding-bottom: 10px;"><h2 id="team-heading" style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 20px; font-weight: 600; color: #14110A;">Your people</h2><span style="font-size: 13px; color: #6B6250;">Change someone's department here. They can't change it themselves.</span></div>
+<sc-for list="{{team}}" as="m" hint-placeholder-count="5">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; padding: 14px 0; border-top: 1px solid #F0E9D6;">
+<sc-if value="{{m.isC}}" hint-placeholder-val="{{true}}"><span style="width: 40px; height: 40px; border-radius: 50%; background: #F6EDCF; color: #6E5410; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;">{{m.ini}}</span></sc-if>
+<sc-if value="{{m.isP}}" hint-placeholder-val="{{false}}"><span style="width: 40px; height: 40px; border-radius: 50%; background: #FBE6D8; color: #9A3F0E; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0;">{{m.ini}}</span></sc-if>
+<span style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 4px;"><span style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;"><strong style="font-size: 15px; color: #14110A;">{{m.person}}</strong>
+<sc-if value="{{m.isC}}" hint-placeholder-val="{{true}}"><span style="font-size: 11px; font-weight: 600; color: #6E5410; background: #F6EDCF; border-radius: 999px; padding: 2px 8px;">Creative</span></sc-if>
+<sc-if value="{{m.isP}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; font-weight: 600; color: #9A3F0E; background: #FBE6D8; border-radius: 999px; padding: 2px 8px;">Production</span></sc-if>
+</span><span style="font-size: 13px; color: #6B6250;">{{m.email}}</span></span>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; font-weight: 600; color: #6B6250;">Move to<select value="{{m.sel}}" onChange="{{m.onSel}}" style="box-sizing: border-box; min-height: 44px; min-width: 150px; border: 1px solid #DCD2B8; border-radius: 10px; padding: 8px 10px; font-family: Figtree, sans-serif; font-size: 14px; color: #14110A; background: #FFFDF7;"><option value="c">Creative</option><option value="p">Production</option><option value="f">Finance</option></select></label>
+<sc-if value="{{m.changed}}" hint-placeholder-val="{{false}}"><span style="display: flex; gap: 8px; align-self: flex-end;"><button type="button" onClick="{{m.save}}" style="min-height: 44px; padding: 10px 16px; border-radius: 12px; border: none; background: #C9A23F; color: #000000; font-family: Figtree, sans-serif; font-size: 14px; font-weight: 700; cursor: pointer;">Save change</button><button type="button" onClick="{{m.cancel}}" style="min-height: 44px; padding: 10px 14px; border-radius: 12px; border: 1px solid #DCD2B8; background: #FFFFFF; color: #14110A; font-family: Figtree, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer;">Cancel</button></span></sc-if>
+<sc-if value="{{m.unchanged}}" hint-placeholder-val="{{true}}"><span style="align-self: flex-end; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-size: 13px; color: #6B6250;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Locked for {{m.first}}</span></sc-if>
+</div>
+</sc-for>
+</section>
+
+</div>
+
+<section aria-labelledby="changes-heading" style="flex: 2 1 300px; min-width: 0; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 22px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px;">
+<h2 id="changes-heading" style="margin: 0 0 10px; font-family: Outfit, Figtree, sans-serif; font-size: 20px; font-weight: 600; color: #14110A;">Department change log</h2>
+<sc-for list="{{log}}" as="l" hint-placeholder-count="2">
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 12px 0; border-top: 1px solid #F0E9D6;"><span style="font-size: 12px; color: #6B6250;">{{l.when}}</span><span style="font-size: 14px; line-height: 1.5;">{{l.text}}</span></div>
+</sc-for>
+</section>
+</div>
+
+</div>
+</main>
+</div>
+</sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1320}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const fmt = (n) => (n % 1 === 0 ? String(n) : n.toFixed(1));
+    const DEPTS = {
+      c: { name: 'Creative', mentor: 'Arjun Mehta', typeWord: 'type of work', taskHint: 'e.g. Diwali key visual, second round' },
+      p: { name: 'Production', mentor: 'Arjun Mehta', typeWord: 'type of work', taskHint: 'e.g. Call sheet for Monday shoot' },
+      f: { name: 'Finance', mentor: 'Kavya Rao', typeWord: 'category', taskHint: 'e.g. September vendor invoices' }
+    };
+    const SEED_ACCOUNTS = [
+      { email: 'priya@yourcompany.com', person: 'Priya Sundar', ini: 'PS', role: 'member', dept: 'c', status: 'active' },
+      { email: 'lakshmi@yourcompany.com', person: 'Lakshmi V', ini: 'LV', role: 'member', dept: 'c', status: 'active' },
+      { email: 'faizal@yourcompany.com', person: 'Faizal A', ini: 'FA', role: 'member', dept: 'c', status: 'active' },
+      { email: 'ravi@yourcompany.com', person: 'Ravi Kumar', ini: 'RK', role: 'member', dept: 'p', status: 'active' },
+      { email: 'karthik@yourcompany.com', person: 'Karthik R', ini: 'KR', role: 'member', dept: 'p', status: 'active' },
+      { email: 'meena@yourcompany.com', person: 'Meena Iyer', ini: 'MI', role: 'member', dept: 'f', status: 'active' },
+      { email: 'divya@yourcompany.com', person: 'Divya N', ini: 'DN', role: 'member', dept: 'c', status: 'pending' },
+      { email: 'arjun@yourcompany.com', person: 'Arjun Mehta', ini: 'AM', role: 'mentor', depts: ['c', 'p'], status: 'active' }
+    ];
+    const DEFAULTS = {
+      c: { task: '', project: 'Diwali festive campaign', type: 'Design', location: '', hours: '', status: 'Done' },
+      p: { task: '', project: 'Monsoon menu shoot', type: 'Shoot', location: '', hours: '', status: 'Done' },
+      f: { task: '', project: 'No project', type: 'Invoices', location: '', hours: '', status: 'Done' }
+    };
+    const SEED_TASKS = {
+      'priya@yourcompany.com|c': [
+        { id: 'c1', time: '10:40 AM', task: 'Diwali key visual: two layout options', project: 'Diwali festive campaign', type: 'Design', location: '', hours: 4, status: 'Done' },
+        { id: 'c2', time: '3:10 PM', task: 'Props list review with Production', project: 'Monsoon menu shoot', type: 'Meeting', location: '', hours: 1.5, status: 'Done' },
+        { id: 'c3', time: '4:30 PM', task: 'November content calendar, first draft', project: 'Social calendar — November', type: 'Copy', location: '', hours: 2, status: 'In progress' }
+      ],
+      'ravi@yourcompany.com|p': [
+        { id: 'p1', time: '10:05 AM', task: 'Call sheet v2 for Monday shoot', project: 'Monsoon menu shoot', type: 'Call sheet', location: 'Office', hours: 1, status: 'Done' },
+        { id: 'p2', time: '2:00 PM', task: 'Location recce', project: 'Monsoon menu shoot', type: 'Recce', location: 'Café location, Besant Nagar', hours: 2.5, status: 'In progress' }
+      ],
+      'meena@yourcompany.com|f': [
+        { id: 'f1', time: '10:30 AM', task: 'September vendor invoices', project: 'No project', type: 'Invoices', location: 'Batch 09', hours: 3, status: 'Done' },
+        { id: 'f2', time: '12:15 PM', task: 'Print budget sheet', project: 'Diwali festive campaign', type: 'Project budget', location: '', hours: 1.5, status: 'Done' }
+      ]
+    };
+    const SEED_WEEK = { 'priya@yourcompany.com': [6, 5, 7, 6], 'ravi@yourcompany.com': [4, 5, 3, 6], 'meena@yourcompany.com': [5, 6, 6, 4] };
+
+    const accounts = s.accounts || SEED_ACCOUNTS;
+    const findAcc = (em) => accounts.find((a) => a.email === String(em || '').trim().toLowerCase());
+    const firstOf = (a) => a.person.split(' ')[0];
+    const now = new Date();
+    const clock = now.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' }).toUpperCase();
+    const stamp = now.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' }) + ', ' + clock;
+    const log = s.log || [{ id: 'l0', when: '2 Oct, 11:20 AM', text: 'Arjun Mehta moved Vikram S from Production to Creative.' }];
+    const withLog = (text) => [{ id: 'l' + Date.now(), when: stamp, text: text }].concat(log);
+
+    const user = s.user ? findAcc(s.user) : null;
+    const view = s.view || 'signin';
+    const email = s.email || '';
+    const password = s.password || '';
+    const loginError = s.loginError || null;
+    const signInAs = (em) => this.setState({ user: em, email: em, password: '', loginError: null, view: 'signin' });
+    const trySignIn = () => {
+      const a = findAcc(email);
+      if (!a) { this.setState({ loginError: 'notfound' }); return; }
+      if (!password) { this.setState({ loginError: 'nopass' }); return; }
+      if (a.status === 'pending') { this.setState({ loginError: 'pending' }); return; }
+      signInAs(a.email);
+    };
+    const LOGIN_ERRORS = {
+      notfound: 'That email isn’t registered yet. Use Register to sign up.',
+      nopass: 'Enter your password.',
+      pending: 'Your registration is waiting for a mentor to confirm your department.'
+    };
+
+    const reg = Object.assign({ name: '', email: '', password: '', dept: '' }, s.reg || {});
+    const regError = s.regError || null;
+    const setReg = (key) => (e) => this.setState({ reg: Object.assign({}, reg, { [key]: e.target.value }), regError: null });
+    const REG_ERRORS = {
+      name: 'Enter your full name.',
+      email: 'Enter a valid work email.',
+      taken: 'That email already has an account. Sign in instead.',
+      password: 'Use at least 6 characters for your password.',
+      dept: 'Choose your department.'
+    };
+    const submitReg = (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      const em = reg.email.trim().toLowerCase();
+      let err = null;
+      if (!reg.name.trim()) err = 'name';
+      else if (em.indexOf('@') < 1) err = 'email';
+      else if (findAcc(em)) err = 'taken';
+      else if (reg.password.length < 6) err = 'password';
+      else if (!reg.dept) err = 'dept';
+      if (err) { this.setState({ regError: err }); return; }
+      const name = reg.name.trim().replace(/\s+/g, ' ');
+      const ini = name.split(' ').map((w) => w.charAt(0)).join('').slice(0, 2).toUpperCase();
+      const acc = { email: em, person: name, ini: ini, role: 'member', dept: reg.dept, status: 'pending' };
+      this.setState({
+        accounts: accounts.concat([acc]),
+        view: 'registered',
+        registered: { first: name.split(' ')[0], dept: DEPTS[reg.dept].name, mentor: DEPTS[reg.dept].mentor },
+        reg: { name: '', email: '', password: '', dept: '' },
+        regError: null,
+        email: em
+      });
+    };
+
+    const vals = {
+      signedOut: !user,
+      memberIn: !!user && user.role === 'member',
+      mentorIn: !!user && user.role === 'mentor',
+      showSignin: view === 'signin',
+      showRegister: view === 'register',
+      showRegistered: view === 'registered',
+      goRegister: () => this.setState({ view: 'register', loginError: null }),
+      goSignin: () => this.setState({ view: 'signin', regError: null }),
+      email: email,
+      password: password,
+      onEmail: (e) => this.setState({ email: e.target.value, loginError: null }),
+      onPassword: (e) => this.setState({ password: e.target.value, loginError: null }),
+      onLoginSubmit: (e) => { if (e && e.preventDefault) e.preventDefault(); trySignIn(); },
+      showLoginError: !!loginError,
+      loginErrorText: LOGIN_ERRORS[loginError] || '',
+      demo: ['priya@yourcompany.com', 'ravi@yourcompany.com', 'meena@yourcompany.com', 'arjun@yourcompany.com'].map((em) => findAcc(em)).filter(Boolean).map((a) => ({
+        person: a.person,
+        ini: a.ini,
+        label: a.role === 'mentor' ? 'Mentor · ' + a.depts.map((k) => DEPTS[k].name).join(', ') : DEPTS[a.dept].name + ' · Member',
+        isC: a.role === 'member' && a.dept === 'c',
+        isP: a.role === 'member' && a.dept === 'p',
+        isF: a.role === 'member' && a.dept === 'f',
+        isM: a.role === 'mentor',
+        go: () => signInAs(a.email)
+      })),
+      reg: reg,
+      onRegName: setReg('name'),
+      onRegEmail: setReg('email'),
+      onRegPassword: setReg('password'),
+      regDepts: ['c', 'p', 'f'].map((k) => ({
+        name: DEPTS[k].name,
+        on: reg.dept === k,
+        off: reg.dept !== k,
+        isC: k === 'c',
+        isP: k === 'p',
+        isF: k === 'f',
+        pick: () => this.setState({ reg: Object.assign({}, reg, { dept: k }), regError: null })
+      })),
+      submitReg: submitReg,
+      showRegError: !!regError,
+      regErrorText: REG_ERRORS[regError] || '',
+      registered: s.registered || { first: '', dept: '', mentor: '' },
+      signOut: () => this.setState({ user: null, email: '', password: '', loginError: null, view: 'signin' }),
+      me: user ? { person: user.person, first: firstOf(user), ini: user.ini } : { person: '', first: '', ini: '' },
+      isC: false, isP: false, isF: false,
+      dep: DEPTS.c, form: DEFAULTS.c, showError: false,
+      totals: { count: '0', hours: '0', done: '0', open: '0' },
+      groups: [], rows: [], week: [], empty: true, submitted: false, notSubmitted: true,
+      mentorDepts: '', mentorDeptsAnd: '', pendingCount: '0', pendingBadge: '', noPending: true,
+      pending: [], team: [], log: log
+    };
+
+    if (user && user.role === 'member') {
+      const dept = user.dept;
+      const key = user.email + '|' + dept;
+      const tasks = Object.assign({}, SEED_TASKS, s.tasks || {});
+      const list = tasks[key] || [];
+      const forms = s.forms || {};
+      const errors = s.errors || {};
+      const submittedMap = s.submitted || {};
+      const form = Object.assign({}, DEFAULTS[dept], forms[key] || {});
+      const setForm = (k) => (e) => this.setState({
+        forms: Object.assign({}, forms, { [key]: Object.assign({}, form, { [k]: e.target.value }) }),
+        errors: Object.assign({}, errors, { [key]: false })
+      });
+      const setList = (next) => this.setState({ tasks: Object.assign({}, tasks, { [key]: next }) });
+      const metaFor = (t) => {
+        const proj = t.project && t.project !== 'No project' ? t.project : '';
+        if (dept === 'f') return [t.type, t.location, proj].filter(Boolean).join(' · ');
+        return [proj, t.type, t.location].filter(Boolean).join(' · ');
+      };
+      const hoursTotal = list.reduce((t, x) => t + (Number(x.hours) || 0), 0);
+      const doneCount = list.filter((x) => x.status === 'Done').length;
+      const byType = {};
+      list.forEach((x) => { byType[x.type] = (byType[x.type] || 0) + 1; });
+      const week = SEED_WEEK[user.email] || [0, 0, 0, 0];
+      Object.assign(vals, {
+        isC: dept === 'c',
+        isP: dept === 'p',
+        isF: dept === 'f',
+        dep: DEPTS[dept],
+        form: form,
+        showError: !!errors[key],
+        onTask: setForm('task'),
+        onProject: setForm('project'),
+        onType: setForm('type'),
+        onLocation: setForm('location'),
+        onHours: setForm('hours'),
+        onStatus: setForm('status'),
+        addTask: () => {
+          if (!form.task.trim()) { this.setState({ errors: Object.assign({}, errors, { [key]: true }) }); return; }
+          const item = { id: 't' + Date.now(), time: clock, task: form.task.trim(), project: form.project, type: form.type, location: form.location.trim(), hours: parseFloat(form.hours) || 0, status: form.status };
+          this.setState({
+            tasks: Object.assign({}, tasks, { [key]: list.concat([item]) }),
+            forms: Object.assign({}, forms, { [key]: Object.assign({}, form, { task: '', location: '', hours: '' }) }),
+            errors: Object.assign({}, errors, { [key]: false }),
+            submitted: Object.assign({}, submittedMap, { [key]: false })
+          });
+        },
+        totals: { count: String(list.length), hours: fmt(hoursTotal), done: String(doneCount), open: String(list.length - doneCount) },
+        groups: Object.keys(byType).map((k) => ({ label: k, count: String(byType[k]) })),
+        empty: list.length === 0,
+        rows: list.map((t) => Object.assign({}, t, {
+          meta: metaFor(t),
+          hours: fmt(Number(t.hours) || 0),
+          isDone: t.status === 'Done',
+          isOpen: t.status !== 'Done',
+          toggle: () => setList(list.map((x) => (x.id === t.id ? Object.assign({}, x, { status: x.status === 'Done' ? 'In progress' : 'Done' }) : x))),
+          remove: () => setList(list.filter((x) => x.id !== t.id))
+        })),
+        submitted: !!submittedMap[key],
+        notSubmitted: !submittedMap[key],
+        submitDay: () => this.setState({ submitted: Object.assign({}, submittedMap, { [key]: true }) }),
+        week: ['Mon 5', 'Tue 6', 'Wed 7', 'Thu 8'].map((label, i) => ({ label: label, count: String(week[i]), today: false, past: true }))
+          .concat([{ label: 'Today', count: String(list.length), today: true, past: false }])
+      });
+    }
+
+    if (user && user.role === 'mentor') {
+      const mine = user.depts;
+      const pendingChoice = s.pendingChoice || {};
+      const editDept = s.editDept || {};
+      const pendingAccs = accounts.filter((a) => a.role === 'member' && a.status === 'pending' && mine.indexOf(a.dept) !== -1);
+      const teamAccs = accounts.filter((a) => a.role === 'member' && a.status === 'active' && mine.indexOf(a.dept) !== -1);
+      const namesAnd = mine.map((k) => DEPTS[k].name);
+      Object.assign(vals, {
+        mentorDepts: namesAnd.join(', '),
+        mentorDeptsAnd: namesAnd.join(' and '),
+        pendingCount: String(pendingAccs.length),
+        pendingBadge: pendingAccs.length ? ' (' + pendingAccs.length + ')' : '',
+        noPending: pendingAccs.length === 0,
+        pending: pendingAccs.map((a) => {
+          const choice = pendingChoice[a.email] || a.dept;
+          return {
+            person: a.person,
+            ini: a.ini,
+            email: a.email,
+            requested: DEPTS[a.dept].name,
+            choice: choice,
+            onChoice: (e) => this.setState({ pendingChoice: Object.assign({}, pendingChoice, { [a.email]: e.target.value }) }),
+            approve: () => this.setState({
+              accounts: accounts.map((x) => (x.email === a.email ? Object.assign({}, x, { status: 'active', dept: choice }) : x)),
+              log: withLog(choice === a.dept
+                ? user.person + ' approved ' + a.person + ' as ' + DEPTS[choice].name + '.'
+                : user.person + ' approved ' + a.person + ' as ' + DEPTS[choice].name + ' (they asked for ' + DEPTS[a.dept].name + ').')
+            }),
+            decline: () => this.setState({
+              accounts: accounts.filter((x) => x.email !== a.email),
+              log: withLog(user.person + ' declined the registration from ' + a.person + '.')
+            })
+          };
+        }),
+        team: teamAccs.map((a) => {
+          const sel = editDept[a.email] || a.dept;
+          const clearEdit = () => { const next = Object.assign({}, editDept); delete next[a.email]; return next; };
+          return {
+            person: a.person,
+            first: firstOf(a),
+            ini: a.ini,
+            email: a.email,
+            isC: a.dept === 'c',
+            isP: a.dept === 'p',
+            sel: sel,
+            changed: sel !== a.dept,
+            unchanged: sel === a.dept,
+            onSel: (e) => this.setState({ editDept: Object.assign({}, editDept, { [a.email]: e.target.value }) }),
+            cancel: () => this.setState({ editDept: clearEdit() }),
+            save: () => this.setState({
+              accounts: accounts.map((x) => (x.email === a.email ? Object.assign({}, x, { dept: sel }) : x)),
+              editDept: clearEdit(),
+              log: withLog(user.person + ' moved ' + a.person + ' from ' + DEPTS[a.dept].name + ' to ' + DEPTS[sel].name + '.')
+            })
+          };
+        }),
+        log: log
+      });
+    }
+
+    return vals;
+  }
+}
+</script>
+</body>
+</html>

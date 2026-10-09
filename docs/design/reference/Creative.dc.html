@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Creative — Turmeric Work Tracker</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&amp;family=Figtree:wght@400;500;600&amp;display=swap">
+<style>
+body{margin:0;background:#FAF6EC;font-family:Figtree,system-ui,sans-serif;color:#3B3426}
+a{color:#7A5C0E}a:hover{color:#4F3B07}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-wrap: wrap; background: #FAF6EC; font-family: Figtree, system-ui, sans-serif; color: #3B3426;">
+
+<nav aria-label="Main menu" style="flex: 1 1 240px; background: #000000; color: #F3E9CF; padding: 28px 16px; box-sizing: border-box; display: flex; flex-direction: column; gap: 28px;">
+<div style="display: flex; flex-direction: column; gap: 6px; padding: 0 8px;">
+<img src="/_blob/24da18a25fe69bd294f06abe9431b8aa" alt="turmeric" style="width: 150px; height: auto; display: block;">
+<span style="font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: #A99E80; padding-left: 4px;">Work tracker</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8E8366; padding: 0 12px 6px;">Me</span>
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg><span>Home</span></a>
+<a href="NewUpdate.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg><span>New update</span></a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8E8366; padding: 0 12px 6px;">Departments</span>
+<a href="Creative.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; background: #2A2311; color: #F0CF6E; text-decoration: none; font-size: 15px; font-weight: 600;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 5.3L19.5 10l-5.3 2.2L12 17.5l-2.2-5.3L4.5 10l5.3-1.7z"></path></svg><span>Creative</span><span style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #D9B24A;"></span></a>
+<a href="Production.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="13" height="11" rx="2"></rect><path d="M16 11l5-3v9l-5-3"></path></svg><span>Production</span><span style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #E07A3A;"></span></a>
+<a href="Finance.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 4h12M6 8.5h12M9 4h1a4.5 4.5 0 0 1 0 9H7l7 7"></path></svg><span>Finance</span><span style="margin-left: auto; width: 8px; height: 8px; border-radius: 50%; background: #8DB05A;"></span></a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<span style="font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: #8E8366; padding: 0 12px 6px;">Mentor</span>
+<a href="Mentor.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 10px 12px; box-sizing: border-box; border-radius: 10px; color: #E9E1CC; text-decoration: none; font-size: 15px; font-weight: 500;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"></path><circle cx="12" cy="12" r="3"></circle></svg><span>Mentor view</span></a>
+</div>
+<div style="margin-top: auto; border-top: 1px solid #2A2618; padding: 20px 8px 0; display: flex; align-items: center; gap: 12px;">
+<span style="width: 38px; height: 38px; border-radius: 50%; background: #C9A23F; color: #000000; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0;">PS</span>
+<span style="display: flex; flex-direction: column; gap: 2px;"><span style="color: #F3E9CF; font-size: 14px; font-weight: 600;">Priya Sundar</span><span style="color: #A99E80; font-size: 12px;">Creative · Member</span></span>
+</div>
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; padding: 32px 40px 56px; box-sizing: border-box;">
+<div style="max-width: 1160px; display: flex; flex-direction: column; gap: 28px;">
+
+<header style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px;">
+<div style="display: flex; align-items: center; gap: 16px;">
+<span style="width: 56px; height: 56px; border-radius: 16px; background: #C9A23F; color: #000000; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l2.2 5.3L19.5 10l-5.3 2.2L12 17.5l-2.2-5.3L4.5 10l5.3-1.7z"></path></svg></span>
+<div style="display: flex; flex-direction: column; gap: 2px;">
+<p style="margin: 0; font-size: 14px; color: #6B6250;"><a href="Main.dc.html">Departments</a> / Creative</p>
+<h1 style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 34px; font-weight: 600; color: #14110A; letter-spacing: -0.01em;">Creative</h1>
+<p style="margin: 0; font-size: 15px; color: #6B6250;">Project-based work · 12 people · Mentor Arjun Mehta</p>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px;">
+<span style="font-size: 12px; color: #6B6250; border: 1px dashed #C9B98A; border-radius: 999px; padding: 4px 10px;">Sample data</span>
+<a href="NewUpdate.dc.html" style="display: inline-flex; align-items: center; min-height: 48px; box-sizing: border-box; padding: 12px 18px; border-radius: 12px; border: 1px solid #DCD2B8; background: #FFFFFF; color: #14110A; text-decoration: none; font-size: 15px; font-weight: 600;">Post update</a>
+<button type="button" onClick="{{toggleNew}}" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 12px 20px; border-radius: 12px; border: none; background: #C9A23F; color: #000000; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>New project</button>
+</div>
+</header>
+
+<sc-if value="{{showNew}}" hint-placeholder-val="{{false}}">
+<section aria-labelledby="new-heading" style="background: #FFFFFF; border: 2px solid #C9A23F; border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 18px;">
+<h2 id="new-heading" style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 20px; font-weight: 600; color: #14110A;">New project</h2>
+<div style="display: flex; flex-wrap: wrap; gap: 16px;">
+<label style="flex: 2 1 280px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Project name<input type="text" value="{{newName}}" onChange="{{onNewName}}" placeholder="e.g. Pongal campaign" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"></label>
+<label style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Due date<input type="date" style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"></label>
+<label style="flex: 1 1 160px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Priority<select style="box-sizing: border-box; min-height: 46px; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 12px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7;"><option>Normal</option><option>High</option><option>Low</option></select></label>
+</div>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #14110A;">Brief<textarea rows="2" placeholder="What's the job, who's it for, what does done look like?" style="box-sizing: border-box; border: 1px solid #DCD2B8; border-radius: 12px; padding: 10px 14px; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 400; color: #14110A; background: #FFFDF7; resize: vertical;"></textarea></label>
+<div style="display: flex; flex-direction: column; gap: 8px;">
+<span style="font-size: 14px; font-weight: 600; color: #14110A;">Team (tag anyone, any department)</span>
+<div style="display: flex; flex-wrap: wrap; gap: 8px;">
+<span style="font-size: 13px; font-weight: 600; color: #6E5410; background: #F6EDCF; border-radius: 999px; padding: 6px 12px;">Priya Sundar · Creative</span>
+<span style="font-size: 13px; font-weight: 600; color: #7E3209; background: #FBE6D8; border-radius: 999px; padding: 6px 12px;">Ravi Kumar · Production</span>
+<span style="font-size: 13px; font-weight: 600; color: #3E5A1E; background: #E6EFD9; border-radius: 999px; padding: 6px 12px;">Meena Iyer · Finance</span>
+<button type="button" style="font-family: Figtree, sans-serif; font-size: 13px; font-weight: 600; color: #3B3426; background: #FFFFFF; border: 1px dashed #C9B98A; border-radius: 999px; padding: 6px 12px; min-height: 32px; cursor: pointer;">+ Tag someone</button>
+</div>
+</div>
+<div style="display: flex; justify-content: flex-end; gap: 12px;">
+<button type="button" onClick="{{toggleNew}}" style="min-height: 46px; padding: 10px 20px; border-radius: 12px; border: 1px solid #DCD2B8; background: #FFFFFF; color: #14110A; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 600; cursor: pointer;">Cancel</button>
+<button type="button" onClick="{{create}}" style="min-height: 46px; padding: 10px 22px; border-radius: 12px; border: none; background: #C9A23F; color: #000000; font-family: Figtree, sans-serif; font-size: 15px; font-weight: 700; cursor: pointer;">Create project</button>
+</div>
+</section>
+</sc-if>
+
+<section aria-label="Creative today" style="display: flex; flex-wrap: wrap; gap: 16px;">
+<div style="flex: 1 1 200px; background: #000000; color: #F3E9CF; border-radius: 18px; padding: 20px 22px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; color: #CFC4A6;">In today</span><span style="font-family: Outfit, Figtree, sans-serif; font-size: 36px; font-weight: 600; color: #F0CF6E; line-height: 1.15;">9 <span style="font-size: 16px; font-weight: 500; color: #CFC4A6;">of 12</span></span></div>
+<div style="flex: 1 1 200px; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 20px 22px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; color: #6B6250;">Updates posted</span><span style="font-family: Outfit, Figtree, sans-serif; font-size: 36px; font-weight: 600; color: #14110A; line-height: 1.15;">5 <span style="font-size: 16px; font-weight: 500; color: #6B6250;">of 12</span></span></div>
+<div style="flex: 1 1 200px; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 20px 22px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; color: #6B6250;">Live projects</span><span style="font-family: Outfit, Figtree, sans-serif; font-size: 36px; font-weight: 600; color: #14110A; line-height: 1.15;">{{projectCount}}</span></div>
+<div style="flex: 1 1 200px; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 20px 22px; display: flex; flex-direction: column; gap: 4px;"><span style="font-size: 13px; color: #6B6250;">Waiting for mentor review</span><span style="font-family: Outfit, Figtree, sans-serif; font-size: 36px; font-weight: 600; color: #14110A; line-height: 1.15;">{{reviewCount}}</span></div>
+</section>
+
+<section aria-labelledby="board-heading" style="display: flex; flex-direction: column; gap: 16px;">
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px;">
+<h2 id="board-heading" style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 22px; font-weight: 600; color: #14110A;">Projects</h2>
+<div role="group" aria-label="Filter by status" style="display: flex; flex-wrap: wrap; gap: 6px;">
+<sc-for list="{{pills}}" as="pill" hint-placeholder-count="5">
+<sc-if value="{{pill.on}}" hint-placeholder-val="{{false}}"><button type="button" aria-pressed="true" onClick="{{pill.pick}}" style="min-height: 40px; padding: 8px 14px; border-radius: 999px; border: 1px solid #14110A; background: #14110A; color: #F3E9CF; font-family: Figtree, sans-serif; font-size: 14px; font-weight: 600; cursor: pointer;">{{pill.label}}</button></sc-if>
+<sc-if value="{{pill.off}}" hint-placeholder-val="{{true}}"><button type="button" aria-pressed="false" onClick="{{pill.pick}}" style="min-height: 40px; padding: 8px 14px; border-radius: 999px; border: 1px solid #DCD2B8; background: #FFFFFF; color: #3B3426; font-family: Figtree, sans-serif; font-size: 14px; font-weight: 500; cursor: pointer;">{{pill.label}}</button></sc-if>
+</sc-for>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px;">
+<sc-for list="{{projects}}" as="p" hint-placeholder-count="6">
+<article style="flex: 1 1 300px; max-width: 100%; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 20px; box-sizing: border-box; display: flex; flex-direction: column; gap: 14px;">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+<span style="font-size: 13px; color: #6B6250;">Owner {{p.owner}}</span>
+<sc-if value="{{p.isPlanning}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; font-weight: 600; color: #5F5848; background: #EFEBE1; border-radius: 999px; padding: 4px 10px;">Planning</span></sc-if>
+<sc-if value="{{p.isProgress}}" hint-placeholder-val="{{true}}"><span style="font-size: 12px; font-weight: 600; color: #6E5410; background: #F6EDCF; border-radius: 999px; padding: 4px 10px;">In progress</span></sc-if>
+<sc-if value="{{p.isReview}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; font-weight: 600; color: #1F4F82; background: #E1ECF7; border-radius: 999px; padding: 4px 10px;">In review</span></sc-if>
+<sc-if value="{{p.isRevision}}" hint-placeholder-val="{{false}}"><span style="font-size: 12px; font-weight: 600; color: #9A3F0E; background: #FBE6D8; border-radius: 999px; padding: 4px 10px;">Revision</span></sc-if>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px;">
+<h3 style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 19px; font-weight: 600; color: #14110A;">{{p.name}}</h3>
+<span style="font-size: 13px; color: #6B6250;">{{p.due}} · {{p.priority}} priority</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px;">
+<div aria-hidden="true" style="display: flex; gap: 3px;">
+<sc-for list="{{p.segs}}" as="seg" hint-placeholder-count="10">
+<sc-if value="{{seg.done}}" hint-placeholder-val="{{true}}"><span style="flex: 1 1 0; height: 6px; border-radius: 3px; background: #C9A23F;"></span></sc-if>
+<sc-if value="{{seg.todo}}" hint-placeholder-val="{{false}}"><span style="flex: 1 1 0; height: 6px; border-radius: 3px; background: #EFE7D2;"></span></sc-if>
+</sc-for>
+</div>
+<span style="font-size: 13px; color: #3B3426;">{{p.tasks}}</span>
+</div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap;">
+<div style="display: flex;">
+<sc-for list="{{p.team}}" as="m" hint-placeholder-count="3">
+<sc-if value="{{m.c}}" hint-placeholder-val="{{true}}"><span title="{{m.full}}" style="width: 32px; height: 32px; margin-right: -6px; border-radius: 50%; border: 2px solid #FFFFFF; background: #F6EDCF; color: #6E5410; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">{{m.ini}}</span></sc-if>
+<sc-if value="{{m.p}}" hint-placeholder-val="{{false}}"><span title="{{m.full}}" style="width: 32px; height: 32px; margin-right: -6px; border-radius: 50%; border: 2px solid #FFFFFF; background: #FBE6D8; color: #9A3F0E; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">{{m.ini}}</span></sc-if>
+<sc-if value="{{m.f}}" hint-placeholder-val="{{false}}"><span title="{{m.full}}" style="width: 32px; height: 32px; margin-right: -6px; border-radius: 50%; border: 2px solid #FFFFFF; background: #E6EFD9; color: #3E5A1E; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700;">{{m.ini}}</span></sc-if>
+</sc-for>
+</div>
+<div style="display: flex; gap: 6px; flex-wrap: wrap;">
+<sc-if value="{{p.tagC}}" hint-placeholder-val="{{true}}"><span style="font-size: 11px; font-weight: 600; color: #6E5410; background: #F6EDCF; border-radius: 999px; padding: 3px 8px;">Creative</span></sc-if>
+<sc-if value="{{p.tagP}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; font-weight: 600; color: #9A3F0E; background: #FBE6D8; border-radius: 999px; padding: 3px 8px;">Production</span></sc-if>
+<sc-if value="{{p.tagF}}" hint-placeholder-val="{{false}}"><span style="font-size: 11px; font-weight: 600; color: #3E5A1E; background: #E6EFD9; border-radius: 999px; padding: 3px 8px;">Finance</span></sc-if>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: flex-start;">
+
+<section aria-labelledby="feed-heading" style="flex: 3 1 460px; min-width: 0; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 22px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 4px;">
+<h2 id="feed-heading" style="margin: 0 0 10px; font-family: Outfit, Figtree, sans-serif; font-size: 20px; font-weight: 600; color: #14110A;">Today's updates</h2>
+<div style="display: flex; gap: 12px; padding: 14px 0; border-top: 1px solid #F0E9D6;">
+<span style="width: 38px; height: 38px; border-radius: 50%; background: #F6EDCF; color: #6E5410; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0;">LV</span>
+<span style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.5;"><span><strong style="color: #14110A;">Lakshmi V</strong> <span style="color: #6B6250;">· 11:05 AM · Website refresh</span></span><span>Homepage hero copy placed; waiting on product photos from Production.</span><span style="font-size: 13px; color: #6B6250;">2 files · tagged Karthik R</span></span>
+</div>
+<div style="display: flex; gap: 12px; padding: 14px 0; border-top: 1px solid #F0E9D6;">
+<span style="width: 38px; height: 38px; border-radius: 50%; background: #F6EDCF; color: #6E5410; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0;">FA</span>
+<span style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.5;"><span><strong style="color: #14110A;">Faizal A</strong> <span style="color: #6B6250;">· 10:48 AM · Packaging redesign</span></span><span>Team picked label direction B; refining the type and colour now.</span><span style="font-size: 13px; color: #6B6250;">1 file</span></span>
+</div>
+<div style="display: flex; gap: 12px; padding: 14px 0; border-top: 1px solid #F0E9D6;">
+<span style="width: 38px; height: 38px; border-radius: 50%; background: #F6EDCF; color: #6E5410; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; flex-shrink: 0;">AJ</span>
+<span style="display: flex; flex-direction: column; gap: 4px; font-size: 14px; line-height: 1.5;"><span><strong style="color: #14110A;">Anitha J</strong> <span style="color: #6B6250;">· 10:20 AM · Annual report design</span></span><span>Collected last year's report and the data sheet from Finance.</span><span style="font-size: 13px; color: #6B6250;">tagged Meena Iyer</span></span>
+</div>
+</section>
+
+<section aria-labelledby="team-heading" style="flex: 2 1 320px; min-width: 0; background: #FFFFFF; border: 1px solid #E9E1CC; border-radius: 18px; padding: 22px 24px; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px;">
+<div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 10px;"><h2 id="team-heading" style="margin: 0; font-family: Outfit, Figtree, sans-serif; font-size: 20px; font-weight: 600; color: #14110A;">Team today</h2><a href="Mentor.dc.html" style="font-size: 14px; font-weight: 600;">All 12</a></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #F0E9D6; font-size: 14px;"><span>Priya Sundar</span><span style="font-size: 12px; font-weight: 600; color: #1F5F37; background: #E3EFE5; border-radius: 999px; padding: 3px 10px;">In · 9:52</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #F0E9D6; font-size: 14px;"><span>Lakshmi V</span><span style="font-size: 12px; font-weight: 600; color: #1F5F37; background: #E3EFE5; border-radius: 999px; padding: 3px 10px;">In · 9:40</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #F0E9D6; font-size: 14px;"><span>Faizal A</span><span style="font-size: 12px; font-weight: 600; color: #1F5F37; background: #E3EFE5; border-radius: 999px; padding: 3px 10px;">In · 9:58</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #F0E9D6; font-size: 14px;"><span>Vikram S</span><span style="font-size: 12px; font-weight: 600; color: #7A4A00; background: #FBEBD0; border-radius: 999px; padding: 3px 10px;">Late · 10:22</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #F0E9D6; font-size: 14px;"><span>Deepa K</span><span style="font-size: 12px; font-weight: 600; color: #1F4F82; background: #E1ECF7; border-radius: 999px; padding: 3px 10px;">WFH · 9:45</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #F0E9D6; font-size: 14px;"><span>Suresh M</span><span style="font-size: 12px; font-weight: 600; color: #5F5848; background: #EFEBE1; border-radius: 999px; padding: 3px 10px;">On leave</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #F0E9D6; font-size: 14px;"><span>Divya N</span><span style="font-size: 12px; font-weight: 600; color: #8C2A20; background: #F8E1DE; border-radius: 999px; padding: 3px 10px;">Not in yet</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 0; border-top: 1px solid #F0E9D6; font-size: 14px;"><span>Rahul D</span><span style="font-size: 12px; font-weight: 600; color: #8C2A20; background: #F8E1DE; border-radius: 999px; padding: 3px 10px;">Not in yet</span></div>
+</section>
+
+</div>
+</div>
+</main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1560}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.state || {};
+    const filter = s.filter || 'All';
+    const people = {
+      PS: ['Priya Sundar', 'c'], LV: ['Lakshmi V', 'c'], FA: ['Faizal A', 'c'], AJ: ['Anitha J', 'c'], DN: ['Divya N', 'c'], RD: ['Rahul D', 'c'], VS: ['Vikram S', 'c'],
+      RK: ['Ravi Kumar', 'p'], SP: ['Sneha P', 'p'], KR: ['Karthik R', 'p'], MI: ['Meena Iyer', 'f']
+    };
+    const base = [
+      { id: 'p1', name: 'Diwali festive campaign', owner: 'Priya S.', status: 'In progress', due: 'Due 20 Oct', priority: 'High', done: 6, total: 10, team: ['PS', 'LV', 'RK', 'MI'] },
+      { id: 'p2', name: 'Monsoon menu shoot', owner: 'Priya S.', status: 'Review', due: 'Due 14 Oct', priority: 'Normal', done: 8, total: 8, team: ['PS', 'RK', 'SP'] },
+      { id: 'p3', name: 'Website refresh', owner: 'Lakshmi V.', status: 'In progress', due: 'Due 12 Oct', priority: 'High', done: 5, total: 9, team: ['LV', 'RD', 'KR'] },
+      { id: 'p4', name: 'Launch teaser film', owner: 'Faizal A.', status: 'Revision', due: 'Due 16 Oct', priority: 'High', done: 7, total: 10, team: ['FA', 'KR'] },
+      { id: 'p5', name: 'Packaging redesign', owner: 'Faizal A.', status: 'In progress', due: 'Due 28 Oct', priority: 'Normal', done: 3, total: 8, team: ['FA', 'VS', 'MI'] },
+      { id: 'p6', name: 'Social calendar — November', owner: 'Priya S.', status: 'Planning', due: 'Due 31 Oct', priority: 'Normal', done: 1, total: 12, team: ['PS', 'DN'] },
+      { id: 'p7', name: 'Annual report design', owner: 'Anitha J.', status: 'Planning', due: 'Due 15 Nov', priority: 'Low', done: 0, total: 14, team: ['AJ', 'VS', 'MI'] }
+    ];
+    const all = (s.added || []).concat(base);
+    const statuses = ['All', 'Planning', 'In progress', 'Review', 'Revision'];
+    const pills = statuses.map((st) => {
+      const n = st === 'All' ? all.length : all.filter((p) => p.status === st).length;
+      return { label: st + ' ' + n, on: filter === st, off: filter !== st, pick: () => this.setState({ filter: st }) };
+    });
+    const projects = all.filter((p) => filter === 'All' || p.status === filter).map((p) => {
+      const kinds = {};
+      const team = p.team.map((ini) => {
+        const info = people[ini] || [ini, 'c'];
+        kinds[info[1]] = true;
+        return { ini: ini, full: info[0], c: info[1] === 'c', p: info[1] === 'p', f: info[1] === 'f' };
+      });
+      const segs = [];
+      for (let i = 0; i < p.total; i++) { segs.push({ done: i < p.done, todo: i >= p.done }); }
+      return Object.assign({}, p, {
+        team: team,
+        segs: segs,
+        tasks: p.done + ' of ' + p.total + ' tasks done',
+        isPlanning: p.status === 'Planning',
+        isProgress: p.status === 'In progress',
+        isReview: p.status === 'Review',
+        isRevision: p.status === 'Revision',
+        tagC: !!kinds.c,
+        tagP: !!kinds.p,
+        tagF: !!kinds.f
+      });
+    });
+    return {
+      pills: pills,
+      projects: projects,
+      projectCount: String(all.length),
+      reviewCount: String(all.filter((p) => p.status === 'Review').length),
+      showNew: !!s.showNew,
+      newName: s.newName || '',
+      onNewName: (e) => this.setState({ newName: e.target.value }),
+      toggleNew: () => this.setState({ showNew: !s.showNew }),
+      create: () => this.setState({
+        showNew: false,
+        newName: '',
+        filter: 'All',
+        added: [{ id: 'n' + Date.now(), name: (s.newName || '').trim() || 'Untitled project', owner: 'Priya S.', status: 'Planning', due: 'Due date not set', priority: 'Normal', done: 0, total: 1, team: ['PS', 'RK', 'MI'] }].concat(s.added || [])
+      })
+    };
+  }
+}
+</script>
+</body>
+</html>
