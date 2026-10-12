@@ -77,3 +77,27 @@ Cron routes need the header `Authorization: Bearer $CRON_SECRET`; Vercel adds it
 4. **Resend:** verify your sending domain and use it in `EMAIL_FROM`. Without `RESEND_API_KEY` the app logs emails instead of sending.
 5. **Supabase advisors** (Database → Advisors): security should show only the intentional `SECURITY DEFINER` RPCs.
 6. **Backups:** daily backups are on for paid plans; on the free plan, export regularly.
+
+## Auth email templates
+
+Set these in Supabase → Authentication → Email Templates so links always open the right page.
+They point at `/auth/confirm`, which works in any browser and does not need the Redirect URLs list.
+
+**Reset password** (subject: `Reset your password`):
+
+```html
+<h2>Reset your password</h2>
+<p>We received a request to reset your password. Follow the link below to choose a new one.</p>
+<p><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=recovery">Reset password</a></p>
+<p>If you didn't request this, you can safely ignore this email.</p>
+```
+
+**Confirm sign up** (subject: `Confirm your email`):
+
+```html
+<h2>Confirm your email</h2>
+<p>Follow the link below to confirm your email address.</p>
+<p><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&type=signup">Confirm email</a></p>
+```
+
+Site URL must be `https://turmeric-work-tracker.vercel.app`.
